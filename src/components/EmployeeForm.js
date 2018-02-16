@@ -87,6 +87,7 @@ class EmployeeForm extends React.Component {
         </CardSection>
 
         <CardSection>
+          <Text style={styles.pickerTextStyle}>Image</Text>
           <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
             <View style={styles.ImageContainer}>
             { this.state.ImageSource === null ? <Text>Select a Photo</Text> :
@@ -110,17 +111,20 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#FFF8E1'
+    backgroundColor: '#fff'
   },
   ImageContainer: {
-    borderRadius: 10,
-    width: 250,
-    height: 250,
-    borderColor: '#9B9B9B',
-    borderWidth: 1 / PixelRatio.get(),
+    flex: 1,
+    marginLeft: 30,
+    borderRadius: 5,
+    height: 100,
+    paddingTop: 50,
+    paddingBottom: 50,
+    paddingRight: 75,
+    paddingLeft: 75,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#CDDC39',
+    backgroundColor: '#d4d4d4',
   },
 };
 
