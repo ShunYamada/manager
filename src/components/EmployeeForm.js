@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { employeeUpdate } from '../actions';
 import { CardSection, Input } from './common';
 import ImagePicker from 'react-native-image-picker';
+import DatePicker from 'react-native-datepicker';
 
 class EmployeeForm extends React.Component {
   state = {
@@ -13,11 +14,10 @@ class EmployeeForm extends React.Component {
 
   selectPhotoTapped() {
     const options = {
-      quality: 1.0,
-      maxWidth: 500,
-      maxHeight: 500,
+      title: 'Select a Image',
       storageOptions: {
-        skipBackup: true
+        skipBackup: true,
+        path: 'images'
       }
     };
 
@@ -40,9 +40,7 @@ class EmployeeForm extends React.Component {
         // let source = { uri: 'data:image/jpeg;base64,' + response.data };
 
         this.setState({
-
           ImageSource: source
-
         });
       }
     });
@@ -90,11 +88,36 @@ class EmployeeForm extends React.Component {
           <Text style={styles.pickerTextStyle}>Image</Text>
           <TouchableOpacity onPress={this.selectPhotoTapped.bind(this)}>
             <View style={styles.ImageContainer}>
-            { this.state.ImageSource === null ? <Text>Select a Photo</Text> :
+            { this.state.ImageSource === null ? <Text>Hello</Text> :
               <Image style={styles.ImageContainer} source={this.state.ImageSource} />
             }
             </View>
           </TouchableOpacity>
+        </CardSection>
+
+        <CardSection>
+          <Text style={styles.pickerTextStyle}>Open Hour</Text>
+          <DatePicker
+          style={{ flex: 1 }}
+          date={this.state.date}
+          mode="time"
+          placeholder="Select open hours"
+          format="hh:mm a"
+          minDate="01:00 AM"
+          maxDate="12:00 AM"
+          confirmBtnText="Confirm"
+          showIcon={false}
+          customStyles={{
+            dateText: {
+              fontSize: 18,
+            },
+            dateTouchBody: {
+              borderWidth: 0
+            }
+          }}
+          cancelBtnText="Cancel"
+          onDateChange={(date) => {this.setState({date: date})}}
+          />
         </CardSection>
       </View>
     );
@@ -126,6 +149,10 @@ const styles = {
     alignItems: 'center',
     backgroundColor: '#d4d4d4',
   },
+  datepickerStyle: {
+    borderColor: '#fff',
+    flex: 1
+  }
 };
 
 const mapStateToProps = (state) => {
