@@ -1,9 +1,17 @@
 import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import { ListView } from 'react-native';
+import { ListView, View } from 'react-native';
 import { employeesFetch } from '../actions';
 import ListItem from './ListItem';
+import MapView from 'react-native-maps';
+
+const styles = {
+  map: {
+    width: 500,
+    height: 500
+  }
+};
 
 class EmployeeList extends React.Component {
   componentWillMount() {
@@ -34,11 +42,22 @@ class EmployeeList extends React.Component {
 
   render() {
     return (
-      <ListView
-        enableEmptySections
-        dataSource={this.dataSource}
-        renderRow={this.renderRow}
-      />
+      <View>
+        <ListView
+          enableEmptySections
+          dataSource={this.dataSource}
+          renderRow={this.renderRow}
+        />
+        <MapView
+          style={styles.map}
+          region={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
+          }}
+        />
+      </View>
     );
   }
 }
