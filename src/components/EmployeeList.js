@@ -4,14 +4,14 @@ import { connect } from 'react-redux';
 import { ListView, View } from 'react-native';
 import { employeesFetch } from '../actions';
 import ListItem from './ListItem';
-import MapView from 'react-native-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 const styles = {
   map: {
     width: 500,
     height: 500
   }
-};
+};　
 
 class EmployeeList extends React.Component {
   componentWillMount() {
@@ -49,6 +49,7 @@ class EmployeeList extends React.Component {
           renderRow={this.renderRow}
         />
         <MapView
+          provider={ PROVIDER_GOOGLE }
           style={styles.map}
           region={{
             latitude: 37.78825,
